@@ -1,13 +1,9 @@
-// import React from 'react';
-import './App.css'
-import { Form } from './Form/Form';
+import { RoutesOption } from './Routes/Routes';
 
 export function App() {
   return (
     <div className="App">
-      <Form />
+      <RoutesOption />
     </div>
   );
 }
-
-export default App;
