@@ -1,11 +1,9 @@
 import { useState } from 'react';
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import './LoginForm.css';
-import { Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Typography } from '@mui/material';
+import { Box, Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Link } from 'react-router-dom';
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -75,6 +73,7 @@ export const LoginForm = () => {
                     >
                         Log In
                     </Button>
+                    <p className="text_link">Don't have an Account ? <Link to="/signUp">Sign-up</Link></p>
                 </Box>
             </Box>
         </Container>
