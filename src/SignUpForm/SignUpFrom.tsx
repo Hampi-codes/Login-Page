@@ -1,26 +1,37 @@
-import { useState } from 'react';
-import TextField from '@mui/material/TextField';
+import { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
 import './SignUpFrom.css';
-import { Container, FormControl, InputLabel, MenuItem, Select, Typography } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { SubmitButton } from '../Common/Components/Submit Button/SubmitButton';
+import { InputField } from '../Common/Components/Input Field/InputField';
+import { PasswordField } from '../Common/Components/Password Field/PasswordField';
+import { handleClickShowPassword, handleMouseDownPassword } from '../Common/Common Methods/PasswordMethods';
+import { handleSubmit } from '../Common/Common Methods/SubmitMethod';
 
 export const SignUpForm = () => {
-    const [name, setName] = useState('');
-    const [age, setAge] = useState('');
-    const [gender, setGender] = useState('');
+    const [firstname, setFristName] = useState('');
     const [email, setEmail] = useState('');
-    const [suggestion, setSuggestion] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(false);
+    const fields = {
+        Name: firstname + " " + lastName,
+        Email: email,
+        password: password,
+    }
+    useEffect(() => {
+        if (password !== confirmPassword) {
+            setError(true);
+        } else {
+            setError(false);
+        }
+    }, [password, confirmPassword]);
 
-    const handleGenderChange = (e: any) => {
-        setGender(e.target.value);
-    };
+    const onSubmit = handleSubmit(fields, password, confirmPassword)
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        console.log('Form submitted:', { name, age, gender, email, suggestion });
-    };
     return (
         <Container component="main" maxWidth="xs">
             <Box className="box">
@@ -29,75 +40,59 @@ export const SignUpForm = () => {
                 </Typography>
                 <Box
                     component="form"
-                    onSubmit={handleSubmit}
+                    onSubmit={onSubmit}
                     sx={{ width: '100%', mt: 1 }}
                 >
-                    <TextField
-                        margin="normal"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        required
-                        fullWidth
-                        id="name"
-                        label="Name"
-                        name="name"
-                    />
-                    <TextField
-                        margin="normal"
-                        value={age}
-                        onChange={(e) => setAge(e.target.value)}
-                        required
-                        fullWidth
-                        id="age"
-                        label="Age"
-                        type="number"
-                    />
-                    <FormControl fullWidth required margin="normal">
-                        <InputLabel id="gender-label">Gender</InputLabel>
-                        <Select
-                            labelId="gender-label"
-                            label="Gender"
-                            value={gender}
-                            onChange={handleGenderChange}
-                        >
-                            <MenuItem value="male">Male</MenuItem>
-                            <MenuItem value="female">Female</MenuItem>
-                            <MenuItem value="non-binary">Non-Binary</MenuItem>
-                        </Select>
-                    </FormControl>
-                    <TextField
-                        margin="normal"
+                    <Grid container spacing={2} >
+                        <Grid item lg={6} md={6} sm={6} xs={6} xl={6}>
+                            <InputField
+                                value={firstname}
+                                onChange={(e: any) => setFristName(e.target.value)}
+                                label={"First Name"}
+                                name={"last name"}
+                                type={"text"}
+                            />
+                        </Grid>
+                        <Grid item lg={6} md={6} sm={6} xs={6} xl={6}>
+                            <InputField
+                                value={lastName}
+                                onChange={(e: any) => setLastName(e.target.value)}
+                                label={"Last Name"}
+                                name={"last name"}
+                                type={"text"}
+                            />
+                        </Grid>
+                    </Grid>
+                    <InputField
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email Address"
-                        name="email"
-                        type="email"
+                        onChange={(e: any) => setEmail(e.target.value)}
+                        label={"Email"}
+                        type={"email"}
                     />
-                    <TextField
-                        margin="normal"
-                        value={suggestion}
-                        onChange={(e) => setSuggestion(e.target.value)}
-                        required
-                        fullWidth
-                        id="suggestion"
-                        label="Any Suggestion"
-                        name="text"
+                    <InputField
+                        value={password}
+                        onChange={(e: any) => setPassword(e.target.value)}
+                        label={"Password"}
+                        type={"text"}
                     />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
-                        Submit
-                    </Button>
+                    {error && <p className='error__p'>passwords mismatch</p>}
+                    <PasswordField
+                        value={confirmPassword}
+                        showPassword={showPassword}
+                        onChange={(e: any) => setConfirmPassword(e.target.value)}
+                        handleClickShowPassword={handleClickShowPassword(setShowPassword)}
+                        handleMouseDownPassword={handleMouseDownPassword}
+                        inputText={"Confirm Password"}
+                        label={"Confirm Passwaord"}
+                    />
+                    <SubmitButton
+                        buttonText={"Sign Up"}
+                        type={"submit"}
+                        variant={"contained"}
+                    />
                     <p className="box__p">Already have an account ? <Link to="/logIn">Login</Link></p>
                 </Box>
             </Box>
         </Container>
     );
 };
-

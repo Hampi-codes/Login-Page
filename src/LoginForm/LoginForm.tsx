@@ -1,25 +1,19 @@
 import { useState } from 'react';
 import './LoginForm.css';
-import { Box, Button, Container, FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from '@mui/material';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { Box, Container, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { SubmitButton } from '../Common/Components/Submit Button/SubmitButton';
+import { PasswordField } from '../Common/Components/Password Field/PasswordField';
+import { handleClickShowPassword, handleMouseDownPassword } from '../Common/Common Methods/PasswordMethods';
+import { handleSubmit } from '../Common/Common Methods/SubmitMethod';
 
 export const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const fields = {email: email, password: password}
 
-    const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-    const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
-        event.preventDefault();
-    };
-
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        console.log('Form submitted:', { email, password });
-    };
+    const onSubmit = handleSubmit(fields)
 
     return (
         <Container component="main" maxWidth="xs">
@@ -29,7 +23,7 @@ export const LoginForm = () => {
                 </Typography>
                 <Box
                     component="form"
-                    onSubmit={handleSubmit}
+                    onSubmit={onSubmit}
                 >
                     <TextField
                         margin="normal"
@@ -42,36 +36,20 @@ export const LoginForm = () => {
                         name="email"
                         type="email"
                     />
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" fullWidth className='box__formControl'>
-                        <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-                        <OutlinedInput
-                            id="outlined-adornment-password"
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <IconButton
-                                        aria-label="toggle password visibility"
-                                        onClick={handleClickShowPassword}
-                                        onMouseDown={handleMouseDownPassword}
-                                        edge="end"
-                                    >
-                                        {showPassword ? <VisibilityOff /> : <Visibility />}
-                                    </IconButton>
-                                </InputAdornment>
-                            }
-                            label="Password"
-                        />
-                    </FormControl>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
-                    >
-                        Log In
-                    </Button>
+                    <PasswordField
+                    value={password}
+                    showPassword={showPassword}
+                    onChange={(e:any) => setPassword(e.target.value)}
+                    handleClickShowPassword={handleClickShowPassword(setShowPassword)}
+                    handleMouseDownPassword={handleMouseDownPassword}
+                    inputText={"Password"}
+                    label={"Passwaord"}
+                    />
+                    <SubmitButton
+                        buttonText={"Log In"}
+                        type={"submit"}
+                        variant={"contained"}
+                    />
                     <p className="box__p">Don't have an Account ? <Link to="/signUp">Sign-up</Link></p>
                 </Box>
             </Box>

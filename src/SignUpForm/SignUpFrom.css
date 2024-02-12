@@ -8,6 +8,13 @@
 }
 
 .box__p {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
     text-align: center;
     margin: 0;
+}
+
+.error__p{
+    color: red;
+    margin: 8px 0 0 0;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
 }
