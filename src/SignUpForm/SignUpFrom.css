@@ -7,21 +7,7 @@
         0 1px 10px 0 rgba(0, 0, 0, .12);
 }
 
-.gender__options--grdi {
-    display: flex;
-    justify-content: space-between;
-}
-
-.textfield {
-    margin-bottom: 15px;
-}
-
-.Button {
-    margin-top: 15px;
-}
-
-#switch_Text{
-    color: blue;
-    cursor: pointer;
+.box__p {
     text-align: center;
+    margin: 0;
 }

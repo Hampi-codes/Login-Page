@@ -7,20 +7,12 @@
         0 1px 10px 0 rgba(0, 0, 0, .12);
 }
 
-.textfield {
-    margin-bottom: 15px;
-}
-
-.Button {
-    margin-top: 15px;
-}
-
-.formControl {
+.box__formControl {
     width: 100% !important;
     margin: 16px 0 8px 0 !important
 }
 
-.text_link {
+.box__p {
     text-align: center;
     margin: 0;
 }

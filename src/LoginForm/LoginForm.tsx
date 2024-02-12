@@ -30,7 +30,6 @@ export const LoginForm = () => {
                 <Box
                     component="form"
                     onSubmit={handleSubmit}
-                    className='box_Form'
                 >
                     <TextField
                         margin="normal"
@@ -43,7 +42,7 @@ export const LoginForm = () => {
                         name="email"
                         type="email"
                     />
-                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" fullWidth className='formControl'>
+                    <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined" fullWidth className='box__formControl'>
                         <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
                         <OutlinedInput
                             id="outlined-adornment-password"
@@ -73,7 +72,7 @@ export const LoginForm = () => {
                     >
                         Log In
                     </Button>
-                    <p className="text_link">Don't have an Account ? <Link to="/signUp">Sign-up</Link></p>
+                    <p className="box__p">Don't have an Account ? <Link to="/signUp">Sign-up</Link></p>
                 </Box>
             </Box>
         </Container>

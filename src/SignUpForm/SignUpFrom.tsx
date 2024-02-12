@@ -94,7 +94,7 @@ export const SignUpForm = () => {
                     >
                         Submit
                     </Button>
-                    <p className="text_link">Already have an account ? <Link to="/logIn">Login</Link></p>
+                    <p className="box__p">Already have an account ? <Link to="/logIn">Login</Link></p>
                 </Box>
             </Box>
         </Container>
